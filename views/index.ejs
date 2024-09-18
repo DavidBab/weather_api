@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles/style.css" />
+		<title>Weather4You</title>
+	</head>
+	<body>
+		<video autoplay muted loop id="background-video">
+			<source src="videos/<%= weather %>.mp4" type="video/mp4" />
+			Your browser does not support the video tag.
+		</video>
+		<section class="basic">
+			<div class="container">
+				<h2 class="nanum-gothic-bold">My Location</h2>
+				<form id="city-form" action="/search" method="POST">
+					<input
+						id="city-input"
+						name="city"
+						type="text"
+						placeholder="<%= name %>, <%= country %>"
+					/>
+					<button type="submit">Search</button>
+				</form>
+				<h1 class="nanum-gothic-extrabold"><%= temp %></h1>
+				<h3 class="nanum-gothic-regular"><%= main %></h3>
+				<div class="high-low">
+					<h3 class="nanum-gothic-regular">H:<%= max %></h3>
+					<h3 class="nanum-gothic-regular">L:<%= min %></h3>
+				</div>
+			</div>
+		</section>
+		<section class="second">
+			<div class="advanced">
+				<div class="box main">
+					<h1 class="nanum-gothic-regular">WIND</h1>
+					<h2 class="nanum-gothic-bold"><%= wind_speed %>km/h</h2>
+					<hr />
+					<h2 class="nanum-gothic-bold"><%= wind_degree %>°degree</h2>
+					<p>created with love and precious time</p>
+				</div>
+				<div class="box humidity">
+					<h1 class="nanum-gothic-regular">HUMIDITY</h1>
+					<h2 class="nanum-gothic-bold"><%= humidity %>%</h2>
+					<p>Lowest point is <%= min %></p>
+				</div>
+				<div class="box feels-like">
+					<h1 class="nanum-gothic-regular">FEELS LIKE</h1>
+					<h2 class="nanum-gothic-bold"><%= feels_like %></h2>
+					<% if (feels_like < temp && wind_speed > 5) { %>
+					<p>Wind is making it feel colder</p>
+					<% } else {%>
+					<p>It feels like <%= feels_like %>°</p>
+					<% } %>
+				</div>
+			</div>
+		</section>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+		<script src="styles/script.js"></script>
+	</body>
+</html>
